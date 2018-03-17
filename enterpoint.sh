@@ -40,11 +40,11 @@ set -e
                 fi
         done
 
-        sed -ri "s@^(MYSQL_HOST = ).*@\1'$MYSQL_HOST'@" /shadowsocks/usermysql.json
-        sed -ri "s@^(MYSQL_PORT = ).*@\1'$MYSQL_PORT'@" /shadowsocks/usermysql.json
-        sed -ri "s@^(MYSQL_USER = ).*@\1'$MYSQL_USER'@" /shadowsocks/usermysql.json
-        sed -ri "s@^(MYSQL_PASS = ).*@\1'$MYSQL_PASSWORD'@" /shadowsocks/usermysql.json
-        sed -ri "s@^(MYSQL_DB   = ).*@\1'$MYSQL_DBNAME'@" /shadowsocks/usermysql.json
-
+sed -ri 's/inputhost/$MYSQL_HOST/' /shadowsocks/usermysql.json
+sed -ri 's/inputport/$MYSQL_PORT/' /shadowsocks/usermysql.json
+sed -ri 's/inputuser/$MYSQL_USER/' /shadowsocks/usermysql.json
+sed -ri 's/inputpassword/$MYSQL_PASSWORD/' /shadowsocks/usermysql.json
+sed -ri 's/inputdb/$MYSQL_DBNAME/' /shadowsocks/usermysql.json
+sed -ri 's/inputmul/1.0/' /shadowsocks/usermysql.json
 
 exec "$@"
