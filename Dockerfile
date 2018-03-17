@@ -1,4 +1,4 @@
-FROM python:2
+FROM python:3
 
 WORKDIR /usr/src/app
 
@@ -13,4 +13,4 @@ EXPOSE 20000-23000
 
 ENTRYPOINT ["/enterpoint.sh"]
 
-CMD ["python2", "/shadowsocks/server.py"]
+CMD ["python", "/shadowsocks/server.py"]
