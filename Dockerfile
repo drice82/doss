@@ -114,4 +114,6 @@ EXPOSE 20000-25000
 EXPOSE 8000-90002
 EXPOSE 6666
 
-CMD ["python2"]
+COPY /root /
+
+CMD ["python2", /shadowsocks/server.py]
