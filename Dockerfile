@@ -116,4 +116,4 @@ EXPOSE 6666
 
 COPY /root /
 
-CMD ["python2", /shadowsocks/server.py]
+CMD ["python2", "/shadowsocks/server.py"]
