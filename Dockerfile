@@ -110,4 +110,8 @@ RUN set -ex; \
 
 RUN pip install cymysql
 
+EXPOSE 20000-25000
+EXPOSE 8000-90002
+EXPOSE 6666
+
 CMD ["python2"]
