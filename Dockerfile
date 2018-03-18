@@ -111,15 +111,12 @@ RUN set -ex; \
 RUN pip install cymysql
 
 COPY /root /
-COPY run.sh /run.sh
-RUN chmod u+rwx /run.sh
+#COPY run.sh /run.sh
+#RUN chmod u+rwx /run.sh
 
 EXPOSE 8012
-EXPOSE 9012
-EXPOSE 8012
+EXPOSE 9001
 EXPOSE 6666
 EXPOSE 20000-23000
-
-ENTRYPOINT ["/run.sh"]
 
 CMD ["python", "/shadowsocks/server.py"]
