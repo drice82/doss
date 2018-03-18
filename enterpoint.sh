@@ -1,6 +1,4 @@
-PATH=/bin:/sbin:$PATH
 
-set -e
 
         if [ -z "$MYSQL_PASSWORD" ]; then
                 echo >&2 'error:  missing MYSQL_PASSWORD'
@@ -47,4 +45,3 @@ sed -ri 's/inputpassword/$MYSQL_PASSWORD/' /shadowsocks/usermysql.json
 sed -ri 's/inputdb/$MYSQL_DBNAME/' /shadowsocks/usermysql.json
 sed -ri 's/inputmul/1.0/' /shadowsocks/usermysql.json
 
-exec "$@"
