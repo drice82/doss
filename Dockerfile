@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:2
 
 WORKDIR /usr/src/app
 
@@ -11,6 +11,6 @@ COPY /root /
 EXPOSE 8012
 EXPOSE 20000-23000
 
-ENTRYPOINT ["/enterpoint.sh"]
+#ENTRYPOINT ["/enterpoint.sh"]
 
 CMD ["python", "/shadowsocks/server.py"]
