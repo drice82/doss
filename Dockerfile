@@ -111,8 +111,8 @@ RUN set -ex; \
 RUN pip install cymysql
 
 COPY /root /
-#ADD enterpoint.sh /enterpoint.sh
-#RUN chmod +x /enterpoint.sh
+COPY enterpoint.sh /enterpoint.sh
+RUN chmod +x /enterpoint.sh
 
 EXPOSE 8012
 EXPOSE 9012
@@ -120,6 +120,6 @@ EXPOSE 8012
 EXPOSE 6666
 EXPOSE 20000-23000
 
-#ENTRYPOINT ["/enterpoint.sh"]
+ENTRYPOINT ["/enterpoint.sh"]
 
 CMD ["python", "/shadowsocks/server.py"]
