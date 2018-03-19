@@ -18,4 +18,4 @@ EXPOSE 20000-23000
 
 #ENTRYPOINT ["/run.sh"]
 
-CMD ["python", "/shadowsocks/server.py"]
+CMD ["python", "/shadowsocksr/server.py"]
