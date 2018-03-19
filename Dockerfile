@@ -9,6 +9,8 @@ COPY /root /
 #COPY run.sh /run.sh
 #RUN chmod u+rwx /run.sh
 
+WORKDIR /shadowsocksr
+
 EXPOSE 8012
 EXPOSE 9001
 EXPOSE 6666
