@@ -53,11 +53,10 @@ if [ -n "$MANYUSER" ]; then
                 fi
         done
   
-        sed -ri "s@^(MYSQL_HOST = ).*@\1'$MYSQL_HOST'@" /shadowsocks/Config.py
-        sed -ri "s@^(MYSQL_PORT = ).*@\1$MYSQL_PORT@" /shadowsocks/Config.py
-        sed -ri "s@^(MYSQL_USER = ).*@\1'$MYSQL_USER'@" /shadowsocks/Config.py
-        sed -ri "s@^(MYSQL_PASS = ).*@\1'$MYSQL_PASSWORD'@" /shadowsocks/Config.py
-        sed -ri "s@^(MYSQL_DB = ).*@\1'$MYSQL_DBNAME'@" /shadowsocks/Config.py
+        sed -ri "s/mysqlhost/$MYSQL_HOST/g" /shadowsocksr/usermysql.json
+        sed -ri "s/mysqlpwd/$MYSQL_PASSWORD/g" /shadowsocksr/usermysql.json
+        sed -ri "s/mysqldb/$MYSQL_DBNAME/g" /shadowsocksr/usermysql.json
+
 else
         echo >&2 'error:  missing MANYUSER'
         echo >&2 '  Did you forget to add -e MANYUSER=... ?'
