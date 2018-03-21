@@ -6,16 +6,13 @@ RUN apk update && apk add \
     && rm -rf /tmp/*
 
 COPY /root /
-#COPY run.sh /run.sh
-#RUN chmod u+rwx /run.sh
+COPY run.sh /run.sh
+RUN chmod u+rwx /run.sh
 
 WORKDIR /shadowsocksr
 
-EXPOSE 8012
-EXPOSE 9001
-EXPOSE 6666
-EXPOSE 20000-23000
+EXPOSE 6000-23000
 
-#ENTRYPOINT ["/run.sh"]
+ENTRYPOINT ["/run.sh"]
 
 CMD ["python", "/shadowsocksr/server.py"]
