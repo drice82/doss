@@ -6,15 +6,26 @@
     "local_port": 1080,
 
     "password": "m",
-    "method": "aes-128-cfb",
-    "protocol": "origin",
+    "method": "aes-128-ctr",
+    "protocol": "auth_aes128_md5",
     "protocol_param": "",
-    "obfs": "plain",
+    "obfs": "tls1.2_ticket_auth_compatible",
     "obfs_param": "",
     "speed_limit_per_con": 0,
     "speed_limit_per_user": 0,
 
-    "additional_ports" : {}, // only works under multi-user mode
+    "additional_ports" " {
+        "443": {
+            "passwd": "pubpwd",
+            "method": "aes-128-ctr",
+            "protocol": "auth_aes128_md5",
+            "protocol_param": "#",
+            "obfs": "tls1.2_ticket_auth_compatible",
+            "obfs_param": ""
+        }
+    }
+//    "additional_ports" : {}, // only works under multi-user mode
+    "additional_ports_only" : true,
     "timeout": 120,
     "udp_timeout": 60,
     "dns_ipv6": false,
