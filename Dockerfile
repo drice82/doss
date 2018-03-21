@@ -11,7 +11,7 @@ RUN chmod u+rwx /run.sh
 
 WORKDIR /shadowsocksr
 
-EXPOSE 6000-23000
+EXPOSE 443
 
 ENTRYPOINT ["/run.sh"]
 
