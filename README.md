@@ -1,10 +1,12 @@
 # doss
 docker ss manyuser
 
+### git
         git clone https://github.com/drice82/doss/
-
+### build
         docker build -t doss:0.1 .
 
+### run
     docker run -d \
     --net=host \
     -e MYSQL_HOST=mysqlhost \
