@@ -6,13 +6,13 @@ RUN apk update && apk add \
     && rm -rf /tmp/*
 
 COPY /root /
-COPY run.sh /run.sh
-RUN chmod u+rwx /run.sh
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod u+rwx /entrypoint.sh
 
 WORKDIR /shadowsocksr
 
 EXPOSE 443
 
-ENTRYPOINT ["/run.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["python", "/shadowsocksr/server.py"]
