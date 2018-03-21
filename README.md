@@ -1,8 +1,9 @@
 # doss
-docker shadowsocks
-mysql config file: /root/shadowsocks/usermysql.conf
+docker ss manyuser
 
-docker build -t doss:v1 .
+git clone https://github.com/drice82/doss/
+
+docker build -t doss:0.1 .
 
 docker run -d \
 --net=host \
@@ -12,4 +13,4 @@ docker run -d \
 -e MYSQL_PASSWORD=mysqlpasswd \
 -e MYSQL_DBNAME=mysqldb \
 -e SETMUL=1.0 \
-doss:v1
+doss:0.1
