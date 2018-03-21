@@ -23,9 +23,9 @@
             "obfs": "tls1.2_ticket_auth_compatible",
             "obfs_param": ""
         }
-    }
+    },
 //    "additional_ports" : {}, // only works under multi-user mode
-    "additional_ports_only" : true,
+    "additional_ports_only": true,
     "timeout": 120,
     "udp_timeout": 60,
     "dns_ipv6": false,
