@@ -18,3 +18,11 @@ docker ss manyuser
     -e MYSQL_DBNAME=mysqldb \
     -e SETMUL=1.0 \
     doss:0.1
+
+### connection information
+port: 443
+Pubpassword: pubpwd
+method: aes-128-ctf
+protocol: auth_aes128_md5
+protocol_param: userport:userpassword
+obfs: tls1.2_ticket_auth
