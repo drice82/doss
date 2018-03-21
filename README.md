@@ -1,9 +1,9 @@
 # doss
 docker ss manyuser
 
-git clone https://github.com/drice82/doss/
+        git clone https://github.com/drice82/doss/
 
-docker build -t doss:0.1 .
+        docker build -t doss:0.1 .
 
     docker run -d \
     --net=host \
