@@ -8,7 +8,8 @@ docker ss manyuser
 
 ### run
     docker run -d \
-    --net=host \
+    –ulimit nofile=20480:40960 nproc=1024:2048 \
+   --net=host \
     --restart=always \
     -e MYSQL_HOST=mysqlhost \
     -e MYSQL_PORT=mysqlport \
