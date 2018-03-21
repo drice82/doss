@@ -14,7 +14,7 @@
     "speed_limit_per_con": 0,
     "speed_limit_per_user": 0,
 
-    "additional_ports" " {
+    "additional_ports" : {
         "443": {
             "passwd": "pubpwd",
             "method": "aes-128-ctr",
