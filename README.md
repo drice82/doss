@@ -9,6 +9,7 @@ docker ss manyuser
 ### run
     docker run -d \
     --net=host \
+    --restart=always \
     -e MYSQL_HOST=mysqlhost \
     -e MYSQL_PORT=mysqlport \
     -e MYSQL_USER=mysqluser \
