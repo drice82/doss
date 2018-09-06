@@ -1,7 +1,7 @@
-FROM phusion/baseimage:v0.11
+FROM phusion/baseimage:0.10.2
     
 RUN apt-get update \
-    && apt-get install -y python-pip libsodium18 \
+    && apt-get install -y python-pip \
     && pip install cymysql \
     && rm -rf /tmp/*
     
