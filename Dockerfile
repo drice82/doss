@@ -30,6 +30,9 @@ RUN chmod u+x /etc/my_init.d/ss_config.sh
 
 #copy scripts
 RUN mkdir /etc/service/ServerStatus
-COPY ServerStatus.sh /etc/service/ServerStatus/run
+COPY /runit/ServerStatus.sh /etc/service/ServerStatus/run
 RUN chmod u+x /etc/service/ServerStatus/run
 
+RUN mkdir /etc/service/ssr
+COPY /runit/ssr.sh /etc/service/ssr/run
+RUN chmod u+x /etc/service/ssr/run
