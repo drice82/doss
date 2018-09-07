@@ -20,8 +20,15 @@ RUN apt-get update \
 # 当完成后,清除APT.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+#copy application
 COPY /root /
 
+#copy init
+RUN mkdir -p /etc/my_init.d
+COPY /init/ss_config.sh /etc/my_init.d/ss_config.sh
+RUN chmod u+x /etc/my_init.d/ss_config.sh
+
+#copy scripts
 RUN mkdir /etc/service/ServerStatus
 COPY ServerStatus.sh /etc/service/ServerStatus/run
 RUN chmod u+x /etc/service/ServerStatus/run
