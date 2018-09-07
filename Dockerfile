@@ -24,4 +24,5 @@ COPY /root /
 
 RUN mkdir /etc/service/ServerStatus
 COPY ServerStatus.sh /etc/service/ServerStatus/run
+RUN chmod u+x /etc/service/ServerStatus/run
 
