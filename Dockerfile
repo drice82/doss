@@ -26,4 +26,4 @@ WORKDIR /shadowsocksr
 
 EXPOSE 443
 
-CMD ["python", "/ServerStatus/client-linux.py", "SERVER=47.254.45.163", "USER=us1"]
+CMD ["python", "/ServerStatus/client-linux.py", "SERVER=118.25.14.218", "USER=us1"]
