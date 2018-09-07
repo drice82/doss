@@ -22,8 +22,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY /root /
 
-WORKDIR /shadowsocksr
+RUN mkdir /etc/service/ServerStatus
+COPY ServerStatus.sh /etc/service/ServerStatus/run
 
-EXPOSE 443
-
-CMD ["python", "/ServerStatus/client-linux.py", "SERVER=118.25.14.218", "USER=us1"]
