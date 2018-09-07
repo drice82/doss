@@ -17,6 +17,8 @@ docker ss manyuser
     -e MYSQL_PASSWORD=mysqlpasswd \
     -e MYSQL_DBNAME=mysqldb \
     -e SETMUL=1.0 \
+    -e STATUS_SRV=ip \
+    -e STATUS_USR=us1 \
     doss:0.1
 
 ### connection information
