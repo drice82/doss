@@ -6,7 +6,8 @@ FROM phusion/baseimage:0.10.2
 ENV HOME /root
 
 # 生成SSH keys,baseimage-docker不包含任何的key,所以需要你自己生成.你也可以注释掉这句命令,系统在启动过程中,会生成一个.
-RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
+#RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
+RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 # 初始化baseimage-docker系统
 CMD ["/sbin/my_init"]
@@ -20,13 +21,9 @@ RUN apt-get update \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY /root /
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod u+rwx /entrypoint.sh
 
 WORKDIR /shadowsocksr
 
 EXPOSE 443
 
-ENTRYPOINT ["/entrypoint.sh"]
-
-CMD ["python", "/shadowsocksr/server.py"]
+CMD ["python", "/ServerStatus/client-linux.py", "SERVER=47.254.45.163", "USER=us1"]
