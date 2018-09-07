@@ -15,28 +15,26 @@ CMD ["/sbin/my_init"]
 # 这里可以放置你自己需要构建的命令
 RUN apt-get update \
     && apt-get install -y python python-pip \
-    && pip install cymysql 
-
-# 当完成后,清除APT.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && pip install cymysql \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+#创建init和runit app的文件夹
+    && mkdir -p /etc/my_init.d \
+    && mkdir /etc/service/ServerStatus \
+    && mkdir /etc/service/ssr
 
 #copy application
 COPY /root /
 
 #copy init
-RUN mkdir -p /etc/my_init.d
 COPY /init/ss_config.sh /etc/my_init.d/ss_config.sh
-RUN chmod u+x /etc/my_init.d/ss_config.sh
 
 #copy scripts
-RUN mkdir /etc/service/ServerStatus
 COPY /runit/ServerStatus.sh /etc/service/ServerStatus/run
-RUN chmod u+x /etc/service/ServerStatus/run
-
-RUN mkdir /etc/service/ssr
 COPY /runit/ssr.sh /etc/service/ssr/run
-RUN chmod u+x /etc/service/ssr/run
 
-WORKDIR /shadowsocksr
+#文件权限
+RUN chmod u+x /etc/my_init.d/ss_config.sh \
+    && chmod u+x /etc/service/ServerStatus/run \
+    && chmod u+x /etc/service/ssr/run
 
 EXPOSE 443
