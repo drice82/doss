@@ -14,8 +14,7 @@ CMD ["/sbin/my_init"]
 
 # 这里可以放置你自己需要构建的命令
 RUN apt-get update \
-    && apt-get install -y python python-pip \
-    && pip install cymysql \
+    && apt-get install -y python \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 #创建init和runit app的文件夹
     && mkdir -p /etc/my_init.d \
