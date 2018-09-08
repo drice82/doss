@@ -1,17 +1,13 @@
-FROM python:2.7.14-alpine
-RUN apk update && apk add \
-        libsodium \
-        wget \
-    && pip install cymysql \
-    && rm -rf /tmp/*
+FROM python:2.7.15-alpine
 
 COPY /root /
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod u+rwx /entrypoint.sh
+
+RUN chmod u+x /entrypoint.sh
 
 WORKDIR /shadowsocksr
 
-EXPOSE 6000-23000
+EXPOSE 8000-24000
 
 ENTRYPOINT ["/entrypoint.sh"]
 
