@@ -35,4 +35,4 @@ RUN chmod u+x /etc/my_init.d/ss_config.sh \
     && chmod u+x /etc/my_init.d/ban_iptables.sh \
     && chmod u+x /etc/service/ssr/run
 
-EXPOSE 443
+EXPOSE 8000-24000
