@@ -25,12 +25,14 @@ COPY /root /
 
 #copy init
 COPY /init/ss_config.sh /etc/my_init.d/ss_config.sh
+COPY /init/ban_iptables.sh /etc/my_init.d/ban_iptables.sh
 
 #copy scripts
 COPY /runit/ssr.sh /etc/service/ssr/run
 
 #文件权限
 RUN chmod u+x /etc/my_init.d/ss_config.sh \
+    chmod u+x /etc/my_init.d/ban_iptables.sh \
     && chmod u+x /etc/service/ssr/run
 
 EXPOSE 443
