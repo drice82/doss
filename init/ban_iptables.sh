@@ -434,15 +434,8 @@ Update_Shell(){
 }
 check_sys
 check_iptables
-action=$1
-if [[ ! -z $action ]]; then
-	[[ $action = "banbt" ]] && Ban_BT && exit 0
-	[[ $action = "banspam" ]] && Ban_SPAM && exit 0
-	[[ $action = "banall" ]] && Ban_ALL && exit 0
-	[[ $action = "unbanbt" ]] && UnBan_BT && exit 0
-	[[ $action = "unbanspam" ]] && UnBan_SPAM && exit 0
-	[[ $action = "unbanall" ]] && UnBan_ALL && exit 0
-fi
+Ban_ALL && exit 0
+
 echo && echo -e " iptables防火墙 封禁管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
   -- Toyo | doub.io/shell-jc2 --
 
