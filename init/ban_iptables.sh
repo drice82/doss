@@ -434,7 +434,7 @@ Update_Shell(){
 }
 check_sys
 check_iptables
-Ban_ALL && exit 0
+Ban_SPAM && exit 0
 
 echo && echo -e " iptables防火墙 封禁管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
   -- Toyo | doub.io/shell-jc2 --
