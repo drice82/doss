@@ -14,11 +14,10 @@ CMD ["/sbin/my_init"]
 
 # 这里可以放置你自己需要构建的命令
 RUN apt-get update \
-    && apt-get install -y python \
+    && apt-get install -y python iptables \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 #创建init和runit app的文件夹
     && mkdir -p /etc/my_init.d \
-    && mkdir /etc/service/ServerStatus \
     && mkdir /etc/service/ssr
 
 #copy application
@@ -28,12 +27,10 @@ COPY /root /
 COPY /init/ss_config.sh /etc/my_init.d/ss_config.sh
 
 #copy scripts
-COPY /runit/ServerStatus.sh /etc/service/ServerStatus/run
 COPY /runit/ssr.sh /etc/service/ssr/run
 
 #文件权限
 RUN chmod u+x /etc/my_init.d/ss_config.sh \
-    && chmod u+x /etc/service/ServerStatus/run \
     && chmod u+x /etc/service/ssr/run
 
 EXPOSE 443
