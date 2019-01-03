@@ -1,6 +1,6 @@
 # 使用phusion/baseimage作为基础镜像,去构建你自己的镜像,需要下载一个明确的版本,千万不要使用`latest`.
 # 查看https://github.com/phusion/baseimage-docker/blob/master/Changelog.md,可用看到版本的列表.
-FROM phusion/baseimage:0.10.2
+FROM phusion/baseimage:0.11
 
 # 设置正确的环境变量.
 ENV HOME /root
