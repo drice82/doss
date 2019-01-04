@@ -4,6 +4,7 @@ FROM phusion/baseimage:0.11
 
 # 设置正确的环境变量.
 ENV HOME /root
+ENV TZ Asia/Shanghai
 
 # 生成SSH keys,baseimage-docker不包含任何的key,所以需要你自己生成.你也可以注释掉这句命令,系统在启动过程中,会生成一个.
 #RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
