@@ -1,4 +1,4 @@
-FROM python:2.7.15-alpine
+FROM python:2.7.15-alpine3.8
 
 COPY /root /
 COPY entrypoint.sh /entrypoint.sh
