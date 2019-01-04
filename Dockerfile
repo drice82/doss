@@ -3,8 +3,7 @@
 FROM phusion/baseimage:0.11
 
 # 设置正确的环境变量.
-ENV HOME /root
-ENV TZ Asia/Shanghai
+ENV MYSQL_PORT=3306 SETMUL=1.0 TZ="Asia/Shanghai"
 
 # 生成SSH keys,baseimage-docker不包含任何的key,所以需要你自己生成.你也可以注释掉这句命令,系统在启动过程中,会生成一个.
 #RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
@@ -15,7 +14,7 @@ CMD ["/sbin/my_init"]
 
 # 这里可以放置你自己需要构建的命令
 RUN apt-get update \
-    && apt-get install -y python iptables \
+    && apt-get install -y python \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 #创建init和runit app的文件夹
     && mkdir -p /etc/my_init.d \
@@ -26,14 +25,12 @@ COPY /root /
 
 #copy init
 COPY /init/ss_config.sh /etc/my_init.d/ss_config.sh
-COPY /init/ban_iptables.sh /etc/my_init.d/ban_iptables.sh
 
 #copy scripts
 COPY /runit/ssr.sh /etc/service/ssr/run
 
 #文件权限
 RUN chmod u+x /etc/my_init.d/ss_config.sh \
-    && chmod u+x /etc/my_init.d/ban_iptables.sh \
     && chmod u+x /etc/service/ssr/run
 
 EXPOSE 8000-24000
