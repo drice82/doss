@@ -1,6 +1,6 @@
 # 使用phusion/baseimage作为基础镜像,去构建你自己的镜像,需要下载一个明确的版本,千万不要使用`latest`.
 # 查看https://github.com/phusion/baseimage-docker/blob/master/Changelog.md,可用看到版本的列表.
-FROM phusion/baseimage:0.10.2
+FROM phusion/baseimage:0.11
 
 # 设置正确的环境变量.
 ENV HOME /root
@@ -14,7 +14,8 @@ CMD ["/sbin/my_init"]
 
 # 这里可以放置你自己需要构建的命令
 RUN apt-get update \
-    && apt-get install -y python iptables \
+    && apt-get install -y python python-pip gawk vnstat python-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev \
+    && pip install psutil \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 #创建init和runit app的文件夹
     && mkdir -p /etc/my_init.d \
@@ -25,14 +26,13 @@ COPY /root /
 
 #copy init
 COPY /init/ss_config.sh /etc/my_init.d/ss_config.sh
-COPY /init/ban_iptables.sh /etc/my_init.d/ban_iptables.sh
+
 
 #copy scripts
 COPY /runit/ssr.sh /etc/service/ssr/run
 
 #文件权限
 RUN chmod u+x /etc/my_init.d/ss_config.sh \
-    && chmod u+x /etc/my_init.d/ban_iptables.sh \
     && chmod u+x /etc/service/ssr/run
 
 EXPOSE 443
