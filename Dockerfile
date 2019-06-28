@@ -19,7 +19,8 @@ RUN apt-get update \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 #创建init和runit app的文件夹
     && mkdir -p /etc/my_init.d \
-    && mkdir /etc/service/ssr
+    && mkdir /etc/service/ssr \
+    && mkdir /etc/service/status
 
 #copy application
 COPY /root /
