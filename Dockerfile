@@ -30,10 +30,12 @@ COPY /init/srvstatus-config.sh /etc/my_init.d/srvstatus-config.sh
 
 #copy scripts
 COPY /runit/ssr.sh /etc/service/ssr/run
+COPY /runit/status.sh /etc/service/status/run
 
 #文件权限
 RUN chmod u+x /etc/my_init.d/ss_config.sh \
     && chmod u+x /etc/my_init.d/srvstatus-config.sh \
-    && chmod u+x /etc/service/ssr/run
+    && chmod u+x /etc/service/ssr/run \
+    && chmod u+x /etc/service/status/run
 
 EXPOSE 443
