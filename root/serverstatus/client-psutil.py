@@ -4,9 +4,9 @@
 # 支持Python版本：2.6 to 3.5 (users of Python 2.4 and 2.5 may use 2.1.3 version)
 # 支持操作系统： Linux, Windows, OSX, Sun Solaris, FreeBSD, OpenBSD and NetBSD, both 32-bit and 64-bit architectures
 
-SERVER = "127.0.0.1" #改成呢你的服务器地址
+SERVER = "SETUP_SERVER_ADDRESS" #改成呢你的服务器地址
 PORT = 35601
-USER = "USER" #改成唯一的客户端用户名，服务器根据这个字段判断是哪台服务器
+USER = "SETUP_USERNAME" #改成唯一的客户端用户名，服务器根据这个字段判断是哪台服务器
 PASSWORD = "USER_DEFAULT_PASSWORD" #修改你的密码，和其他客户端可以是相同的
 
 INTERVAL = 1 # 请勿修改
