@@ -6,8 +6,8 @@
 # 时间: 20190128
 # 说明: 默认情况下修改server和user就可以了。
 
-SERVER = "127.0.0.1"
-USER = "s01"
+SERVER = "SETUP_SERVER_ADDRESS"
+USER = "SETUP_USERNAME"
 
 
 PORT = 35601
