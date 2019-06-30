@@ -160,7 +160,7 @@ def ip_status():
             ip_check += 1
         s.close()
         del s
-    if ip_check >= 2:
+    if ip_check >= 3:
         return False
     else:
         return True
