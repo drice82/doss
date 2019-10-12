@@ -6,8 +6,6 @@ RUN curl -L -o /tmp/go.sh https://install.direct/go.sh
 RUN chmod +x /tmp/go.sh
 RUN /tmp/go.sh
 
-# 使用phusion/baseimage作为基础镜像,去构建你自己的镜像,需要下载一个明确的版本,千万不要使用`latest`.
-# 查看https://github.com/phusion/baseimage-docker/blob/master/Changelog.md,可用看到版本的列表.
 FROM phusion/baseimage:0.11
 
 COPY --from=builder /usr/bin/v2ray/v2ray /usr/bin/v2ray/
@@ -41,28 +39,34 @@ RUN apt-get update \
     && pip3 install pymysql \
     && pip install psutil \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+
 #创建init和runit app的文件夹
     && mkdir -p /etc/my_init.d \
     && mkdir /etc/service/v2ray \
     && mkdir /etc/service/status \
     && mkdir /etc/service/v2muser
 
+#install caddy
 RUN curl https://getcaddy.com | bash -s personal
 
 #copy init
 COPY /init/v2muser_config.sh /etc/my_init.d/v2muser_config.sh
-#COPY /init/srvstatus-config.sh /etc/my_init.d/srvstatus-config.sh
+COPY /init/caddy_config.sh /etc/my_init.d/caddy_config.sh
+COPY /init/srvstatus-config.sh /etc/my_init.d/srvstatus-config.sh
 
 #copy scripts
 COPY /runit/v2ray.sh /etc/service/v2ray/run
 COPY /runit/v2muser.sh /etc/service/v2muser/run
-#COPY /runit/status.sh /etc/service/status/run
+COPY /runit/caddy.sh /etc/service/caddy/run
+COPY /runit/status.sh /etc/service/srvstatus/run
 
 #文件权限
 RUN chmod u+x /etc/service/v2ray/run \
     && chmod u+x /etc/my_init.d/v2muser_config.sh \
-    && chmod u+x /etc/service/v2muser/run 
-#    && chmod u+x /etc/service/status/run
+    && chmod u+x /etc/service/v2muser/run \
+    && chmod u+x /etc/my_init.d/caddy_config.sh \
+    && chmod u+x /etc/service/caddy/run
+    && chmod u+x /etc/service/srvstatus/run
 
 
 EXPOSE 443
