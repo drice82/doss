@@ -7,11 +7,11 @@ import time
 import json
 import subprocess
 
-HOST = '127.0.0.1'
+HOST = 'MYSQL_HOST'
 PORT = 3306
-USERNAME = 'admin_ss1'
-PASSWORD = ''
-DBNAME = 'admin_ss1'
+USERNAME = 'MYSQL_USER'
+PASSWORD = 'MYSQL_PASSWORD'
+DBNAME = 'MYSQL_DBNAME'
 
 UPDATE_TIME = 150
 
@@ -196,9 +196,10 @@ def sql_cov_json(userlist):
 
 
 def update_cfg(u_list):
-    v2ray_status = isRunning(V2RAY_PATH)
-    r_cmd = 'service v2ray restart'
-    s_cmd = 'service v2ray start'
+    #v2ray_status = isRunning(V2RAY_PATH)
+    v2ray_status = True
+    r_cmd = 'sv restart v2ray'
+    s_cmd = 'sv start v2ray'
     sql_cov_json(u_list)
     if v2ray_status:
         os.popen(r_cmd)
@@ -229,76 +230,7 @@ def main():
             print(e)
         time.sleep(UPDATE_TIME)
 
-def run_scripts(argv):
-    global HOST, PORT, USERNAME, PASSWORD, DBNAME
-    import getopt
-    import re
-    import os
-    filename = os.path.basename(sys.argv[0])
-    help_text = '''Start up the V2muser.
-
-Usage:
-    ./{filename}
-    ./{filename} -s <ip> -p <port> -u <username>, -k <password> -db <dbname>
-    ./{filename} -h | --help
-    ./{filename} --version
-
-options:
-    -h --help       Show this screen.
-    -s --serverip   mysql server ip.
-    -p --port       mysql server port.
-    -u --username   mysql server username.
-    -k --password   mysql server password. 
-    -db --dbname    mysql server db name.
-    -v --version    Show version.'''.format(filename=filename)
-    try:
-        opts, args = getopt.getopt(argv, "h:s:p:u:k:db",["--help", "--serverip=", "--port=", "--username=", "--password=", "--dbname="])
-    except getopt.GetoptError:
-        print("err")
-        print(help_text)
-        sys.exit(2)
-    error_count=0
-    for opt, arg in opts:
-        if opt == ("-h", "--help"):
-            print(help_text)
-            sys.exit()
-        elif opt in ("-s", "--serverip"):
-            compile_ip = re.compile(
-                    '^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$'
-                    )
-            if compile_ip.match(arg):
-                HOST = arg
-            else:
-                print(arg + ' is not a legal ip address!')
-                error_count +=1
-        elif opt in ("-p", "--port"):
-            try:
-                arg = int(arg)
-                if arg <1 or arg >65535:
-                    print('The port numbers in the range from 1 to 65535.')
-                    error_count +=1
-            except Exception:
-                print(opt + ' must use intergers')
-                error_count +=1
-            PORT = arg
-        elif opt in ("-u", "--username"):
-            USERNAME = arg
-        elif opt in ("-k", "--password"):
-            PASSWORD = arg
-        elif opt in ("-db", "--dbname"):
-            DBNAME = arg
-    if error_count !=0:
-        print(str(error_count) + ' error(s)')
-        sys.exit()
-
-def pri_par():
-    print('''
-Mysql Address:      {0}
-Port:               {1}
-'''.format(HOST, PORT))
 
 if __name__ == "__main__":
-    run_scripts(sys.argv[1:])
-    pri_par()
     main()
 
