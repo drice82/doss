@@ -19,8 +19,9 @@ COPY --from=builder /usr/bin/v2ray/geosite.dat /usr/bin/v2ray/
 ENV HOME /root
 ENV PATH /usr/bin/v2ray:$PATH
 
-#copy config
+#copy app and config
 COPY /root/v2ray/config.json /etc/v2ray/config.json
+COPY /root/v2muser/v2muser.py /usr/bin/v2muser/
 
 # 生成SSH keys,baseimage-docker不包含任何的key,所以需要你自己生成.你也可以注释掉这句命令,系统在启动过程中,会生成一个.
 #RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
@@ -43,23 +44,22 @@ RUN apt-get update \
 #创建init和runit app的文件夹
     && mkdir -p /etc/my_init.d \
     && mkdir /etc/service/v2ray \
-    && mkdir /etc/service/status
-
+    && mkdir /etc/service/status \
+    && mkdir /etc/service/v2muser
 
 #copy init
-#COPY /init/ss_config.sh /etc/my_init.d/ss_config.sh
+COPY /init/v2muser_config.sh /etc/my_init.d/v2muser_config.sh
 #COPY /init/srvstatus-config.sh /etc/my_init.d/srvstatus-config.sh
 
 #copy scripts
 COPY /runit/v2ray.sh /etc/service/v2ray/run
-#COPY /runit/ssr.sh /etc/service/ssr/run
+COPY /runit/v2muser.sh /etc/service/v2muser/run
 #COPY /runit/status.sh /etc/service/status/run
 
 #文件权限
-RUN chmod u+x /etc/service/v2ray/run
-#RUN chmod u+x /etc/my_init.d/ss_config.sh \
-#    && chmod u+x /etc/my_init.d/srvstatus-config.sh \
-#    && chmod u+x /etc/service/ssr/run \
+RUN chmod u+x /etc/service/v2ray/run \
+    && chmod u+x /etc/my_init.d/v2muser_config.sh \
+    && chmod u+x /etc/service/v2muser/run 
 #    && chmod u+x /etc/service/status/run
 
 
