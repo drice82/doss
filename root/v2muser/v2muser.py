@@ -82,10 +82,8 @@ def get_traffic(user_email):
 #进程检查
 def isRunning(process_name):
     try:
-        process = len(
-                os.popen('ps aux | grep "' + process_name +
-                    '" | grep -v grep').readlines())
-        if process >=1:
+        process =os.popen('sv status v2ray').read()
+        if process[0:3] =='run':
             return True
         else:
             return False
@@ -196,8 +194,8 @@ def sql_cov_json(userlist):
 
 
 def update_cfg(u_list):
-    #v2ray_status = isRunning(V2RAY_PATH)
-    v2ray_status = True
+    v2ray_status = isRunning(V2RAY_PATH)
+    #v2ray_status = True
     r_cmd = 'sv restart v2ray'
     s_cmd = 'sv start v2ray'
     sql_cov_json(u_list)
