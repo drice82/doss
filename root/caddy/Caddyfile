@@ -1,0 +1,7 @@
+mydomain.me
+{
+  proxy /data localhost:8081 {
+    websocket
+    header_upstream -Origin
+  }
+}
