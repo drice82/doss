@@ -65,7 +65,7 @@ RUN chmod u+x /etc/service/v2ray/run \
     && chmod u+x /etc/my_init.d/v2muser_config.sh \
     && chmod u+x /etc/service/v2muser/run \
     && chmod u+x /etc/my_init.d/caddy_config.sh \
-    && chmod u+x /etc/service/caddy/run
+    && chmod u+x /etc/service/caddy/run \
     && chmod u+x /etc/service/srvstatus/run
 
 
