@@ -52,7 +52,7 @@ RUN curl https://getcaddy.com | bash -s personal
 #copy init
 COPY /init/v2muser_config.sh /etc/my_init.d/v2muser_config.sh
 COPY /init/caddy_config.sh /etc/my_init.d/caddy_config.sh
-COPY /init/srvstatus-config.sh /etc/my_init.d/srvstatus-config.sh
+COPY /init/srvstatus_config.sh /etc/my_init.d/srvstatus_config.sh
 
 #copy scripts
 COPY /runit/v2ray.sh /etc/service/v2ray/run
@@ -66,7 +66,8 @@ RUN chmod u+x /etc/service/v2ray/run \
     && chmod u+x /etc/service/v2muser/run \
     && chmod u+x /etc/my_init.d/caddy_config.sh \
     && chmod u+x /etc/service/caddy/run \
+    && chmod u+x /etc/my_init.d/srvstatus_config.sh \
     && chmod u+x /etc/service/srvstatus/run
 
 
-EXPOSE 443
+EXPOSE 80 443 8081
