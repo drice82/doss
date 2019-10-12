@@ -195,32 +195,31 @@ def sql_cov_json(userlist):
 
 def update_cfg(u_list):
     v2ray_status = isRunning(V2RAY_PATH)
-    #v2ray_status = True
     r_cmd = 'sv restart v2ray'
     s_cmd = 'sv start v2ray'
     sql_cov_json(u_list)
     if v2ray_status:
         os.popen(r_cmd)
-        print('restart')
+        #print('restart')
     else:
         os.popen(s_cmd)
-        print('start')
+        #print('start')
 
 def accept_cfg():
     user_config_temp = pull_user()
     if user_config_temp !='None':
-        print('Update user list')
+        #print('Update user list')
         try:
             update_cfg(user_config_temp)
         except Exception as e:
             print(e)
             print('Update Error!')
-    else:
-        print('no update')
+    #else:
+        #print('no update')
 
 def main():
     while True:
-        print(time.asctime(time.localtime(time.time())))
+        #print(time.asctime(time.localtime(time.time())))
         try:
             update_traffic()
             accept_cfg()
