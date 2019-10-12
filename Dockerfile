@@ -21,6 +21,7 @@ ENV PATH /usr/bin/v2ray:$PATH
 COPY /root/v2ray/config.json /etc/v2ray/config.json
 COPY /root/v2muser/v2muser.py /usr/bin/v2muser/
 COPY /root/caddy/Caddyfile /etc/caddy/Caddyfile
+COPY /root/serverstatus/client-linux.py /usr/bin/srvstatus/
 
 # 生成SSH keys,baseimage-docker不包含任何的key,所以需要你自己生成.你也可以注释掉这句命令,系统在启动过程中,会生成一个.
 #RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
@@ -39,11 +40,10 @@ RUN apt-get update \
     && pip3 install pymysql \
     && pip install psutil \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-
 #创建init和runit app的文件夹
     && mkdir -p /etc/my_init.d \
     && mkdir /etc/service/v2ray \
-    && mkdir /etc/service/status \
+    && mkdir /etc/service/srvstatus \
     && mkdir /etc/service/v2muser
 
 #install caddy

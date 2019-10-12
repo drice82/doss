@@ -1,2 +1,2 @@
 #!/bin/sh
-exec python /serverstatus/client-linux.py 2>&1
+exec python /usr/bin/srvstatus/client-linux.py 2>&1
