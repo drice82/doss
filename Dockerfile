@@ -22,11 +22,11 @@ ENV PATH /usr/bin/v2ray:$PATH
 #copy app and config
 COPY /root/v2ray/config.json /etc/v2ray/config.json
 COPY /root/v2muser/v2muser.py /usr/bin/v2muser/
+COPY /root/caddy/Caddyfile /etc/caddy/Caddyfile
 
 # 生成SSH keys,baseimage-docker不包含任何的key,所以需要你自己生成.你也可以注释掉这句命令,系统在启动过程中,会生成一个.
 #RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
-#RUN cat /pubkey/key.pub >> /root/.ssh/authorized_keys && rm -rf /pubkey
 
 # 初始化baseimage-docker系统
 CMD ["/sbin/my_init"]
