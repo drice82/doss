@@ -47,6 +47,8 @@ RUN apt-get update \
     && mkdir /etc/service/status \
     && mkdir /etc/service/v2muser
 
+RUN curl https://getcaddy.com | bash -s personal
+
 #copy init
 COPY /init/v2muser_config.sh /etc/my_init.d/v2muser_config.sh
 #COPY /init/srvstatus-config.sh /etc/my_init.d/srvstatus-config.sh
