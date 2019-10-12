@@ -60,7 +60,12 @@
         {
             "protocol": "freedom",
             "settings": {}
-        }
+        },
+	{
+	    "protocol": "blackhold",
+	    "settings": {},
+	    "tag": "block"
+	}
     ],
     "routing": {
         "settings": {
@@ -71,7 +76,14 @@
                     ],
                     "outboundTag": "api",
                     "type": "field"
-                }
+                },
+		{
+		    "type": "field",
+		    "outboundTag": "block",
+		    "protocol": [
+		        "bittorrent"
+		    ]
+		}
             ]
         },
         "strategy": "rules"
