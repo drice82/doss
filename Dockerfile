@@ -19,7 +19,7 @@ ENV PATH /usr/bin/v2ray:$PATH
 
 #copy app and config
 COPY /root/v2ray/config.json /etc/v2ray/config.json
-COPY /root/v2muser/v2muser.py /usr/bin/v2muser/
+COPY /root/v2muser /usr/bin/v2muser/
 COPY /root/caddy/Caddyfile /etc/caddy/Caddyfile
 COPY /root/serverstatus/client-linux.py /usr/bin/srvstatus/
 
@@ -32,13 +32,7 @@ CMD ["/sbin/my_init"]
 
 # 这里可以放置你自己需要构建的命令
 RUN apt-get update \
-    && apt-get install -y python python-dev python-pip \
-    build-essential libssl-dev libffi-dev \
-    libxml2-dev libxslt1-dev zlib1g-dev python-setuptools \
-    python3 python3-dev python3-pip \
-    gawk vnstat wget curl \
-    && pip3 install pymysql \
-    && pip install psutil \
+    && apt-get install -y python vnstat iproute2 \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 #创建init和runit app的文件夹
     && mkdir -p /etc/my_init.d \

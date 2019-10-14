@@ -62,7 +62,7 @@
             "settings": {}
         },
         {
-            "protocol":"blockhole",
+            "protocol":"blackhole",
             "settings":{},
             "tag":"block"
         }
