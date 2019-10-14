@@ -14,7 +14,6 @@ COPY --from=builder /usr/bin/v2ray/geoip.dat /usr/bin/v2ray/
 COPY --from=builder /usr/bin/v2ray/geosite.dat /usr/bin/v2ray/
 
 # 设置正确的环境变量.
-ENV HOME /root
 ENV PATH /usr/bin/v2ray:$PATH
 
 #copy app and config
@@ -32,36 +31,23 @@ CMD ["/sbin/my_init"]
 
 # 这里可以放置你自己需要构建的命令
 RUN apt-get update \
-    && apt-get install -y python vnstat iproute2 \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-#创建init和runit app的文件夹
-    && mkdir -p /etc/my_init.d \
-    && mkdir /etc/service/v2ray \
-    && mkdir /etc/service/srvstatus \
-    && mkdir /etc/service/v2muser
+    && apt-get install -y vnstat iproute2 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
 
 #install caddy
 RUN curl https://getcaddy.com | bash -s personal
 
 #copy init
-COPY /init/v2muser_config.sh /etc/my_init.d/v2muser_config.sh
-COPY /init/caddy_config.sh /etc/my_init.d/caddy_config.sh
-COPY /init/srvstatus_config.sh /etc/my_init.d/srvstatus_config.sh
+COPY /init /etc/my_init.d/
 
 #copy scripts
-COPY /runit/v2ray.sh /etc/service/v2ray/run
-COPY /runit/v2muser.sh /etc/service/v2muser/run
-COPY /runit/caddy.sh /etc/service/caddy/run
-COPY /runit/status.sh /etc/service/srvstatus/run
+COPY /runit /etc/service/
 
 #文件权限
 RUN chmod u+x /etc/service/v2ray/run \
-    && chmod u+x /etc/my_init.d/v2muser_config.sh \
-    && chmod u+x /etc/service/v2muser/run \
-    && chmod u+x /etc/my_init.d/caddy_config.sh \
     && chmod u+x /etc/service/caddy/run \
-    && chmod u+x /etc/my_init.d/srvstatus_config.sh \
-    && chmod u+x /etc/service/srvstatus/run
-
+    && chmod u+x /etc/service/v2muser/run \
+    && chmod u+x /etc/service/srvstatus/run \
+    && chmod u+x /etc/my_init.d/* 
 
 EXPOSE 80 443 8081
