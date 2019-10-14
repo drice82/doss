@@ -60,6 +60,11 @@
         {
             "protocol": "freedom",
             "settings": {}
+        },
+        {
+            "protocol":"blockhole",
+            "settings":{},
+            "tag":"block"
         }
     ],
     "routing": {
@@ -71,6 +76,21 @@
                     ],
                     "outboundTag": "api",
                     "type": "field"
+                },
+                {
+                    "type":"field",
+                    "outboundTag":"block",
+                    "protocol":[
+                        "bittorrent"
+                    ]
+                },
+                {
+                    "type":"field",
+                    "outboundTag":"block",
+                    "domain":[
+                        "domain:block.com",
+                        "domain:block2.com"
+                    ]
                 }
             ]
         },
