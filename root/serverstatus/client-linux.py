@@ -9,7 +9,6 @@
 SERVER = "SETUP_SERVER_ADDRESS"
 USER = "SETUP_USERNAME"
 
-
 PORT = 35601
 PASSWORD = "USER_DEFAULT_PASSWORD"
 INTERVAL = 1
@@ -267,10 +266,11 @@ if __name__ == '__main__':
             print("Connecting...")
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((SERVER, PORT))
-            data = s.recv(1024)
+            data = s.recv(1024).decode()
             if data.find("Authentication required") > -1:
-                s.send(USER + ':' + PASSWORD + '\n')
-                data = s.recv(1024)
+                s_str=USER + ':' + PASSWORD + '\n'
+                s.send(s_str.encode())
+                data = s.recv(1024).decode()
                 if data.find("Authentication successful") < 0:
                     print(data)
                     raise socket.error
@@ -279,7 +279,7 @@ if __name__ == '__main__':
                 raise socket.error
 
             print(data)
-            data = s.recv(1024)
+            data = s.recv(1024).decode()
             print(data)
 
             timer = 0
@@ -334,8 +334,8 @@ if __name__ == '__main__':
                 array['time_189'] = pingTime.get('189')
                 array['time_10086'] = pingTime.get('10086')
                 array['tcp'], array['udp'], array['process'], array['thread'] = tupd()
-
-                s.send("update " + json.dumps(array) + "\n")
+                s_str = "update " + json.dumps(array) + "\n"
+                s.send(s_str.encode())
         except KeyboardInterrupt:
             raise
         except socket.error:
