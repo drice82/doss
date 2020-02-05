@@ -139,13 +139,13 @@ def pull_user():
             i for i in data_cache
             if i not in [m for m in data if m in data_cache]
         ]
-        data_id = [x['id'] for x in data]
-        data_cache_id = [y['id'] for y in data_cache]
+        data_id = [x['uuid'] for x in data]
+        data_cache_id = [y['uuid'] for y in data_cache]
         id_change = [z for z in data_id if z not in data_cache_id]
         data_delete =[]
         for n1 in data:
             for n2 in id_change:
-                if n1['id'] == n2:
+                if n1['uuid'] == n2:
                     n1['enable'] = 0
                     data_delete.append(n1)
         data_all = data_change + data_delete
