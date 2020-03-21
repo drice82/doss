@@ -12,6 +12,7 @@ PORT = 3306
 USERNAME = 'MYSQL_USER'
 PASSWORD = 'MYSQL_PASSWORD'
 DBNAME = 'MYSQL_DBNAME'
+MUL = SETMUL
 
 UPDATE_TIME = 150
 
@@ -31,7 +32,7 @@ def update_traffic():
         try:
             traffic_msg = get_traffic(u_list['email'])
             if traffic_msg !=0:
-                tra_sql = 'UPDATE user SET d=d+' + str(traffic_msg[0]) + ', u=u+' + str(traffic_msg[1]) + ', t=' + str(traffic_msg[2]) + ' WHERE email=\'' + u_list['email'] + '\''
+                tra_sql = 'UPDATE user SET d=d+' + str(int(traffic_msg[0]*MUL)) + ', u=u+' + str(int(traffic_msg[1]*MUL)) + ', t=' + str(traffic_msg[2]) + ' WHERE email=\'' + u_list['email'] + '\''
                 exec_sql(tra_sql)
         except Exception as e:
             print('Traffic read error!')
