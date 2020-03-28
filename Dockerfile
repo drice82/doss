@@ -18,6 +18,7 @@ ENV PATH /usr/bin/v2ray:$PATH
 
 #copy app and config
 COPY /root/v2ray/config.json /etc/v2ray/config.json
+COPY /root/v2ray/config-ss.json /home/config.json
 COPY /root/v2muser /usr/bin/v2muser/
 COPY /root/caddy/Caddyfile /etc/caddy/Caddyfile
 COPY /root/serverstatus/client-linux.py /usr/bin/srvstatus/
