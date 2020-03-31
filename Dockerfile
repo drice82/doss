@@ -3,6 +3,14 @@ FROM phusion/baseimage:0.11
 
 
 # 设置正确的环境变量.
+ENV SERVER_ADDR 0.0.0.0
+ENV SERVER_PORT 10109
+ENV PASSWORD=
+ENV METHOD	chacha20-ietf-poly1305
+ENV TIMEOUT	300
+ENV DNS_ADDRS	8.8.8.8,8.8.4.4
+ENV TZ UTC
+ENV ARGS=
 
 #copy app and config
 COPY /root/serverstatus/client-linux.py /usr/bin/srvstatus/
@@ -27,6 +35,7 @@ COPY /runit /etc/service/
 
 #文件权限
 RUN chmod u+x /etc/service/srvstatus/run \
+    && chmod u+x /etc/service/ss-server/run \
     && chmod u+x /etc/my_init.d/* 
 
 EXPOSE 10109
