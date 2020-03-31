@@ -7,19 +7,15 @@ docker ss manyuser
         docker build -t doss:0.1 .
 
 ### run
-    docker run -d \
-    -p 443:443 \
-    -p 443:443/upd \
-    --restart=always \
-    -e MYSQL_HOST=mysqlhost \
-    -e MYSQL_PORT=mysqlport \
-    -e MYSQL_USER=mysqluser \
-    -e MYSQL_PASSWORD=mysqlpasswd \
-    -e MYSQL_DBNAME=mysqldb \
-    -e SETMUL=1.0 \
-    -e STATUS_ADDRESS=ip \
-    -e STATUS_USER=us1 \
-    doss:0.1
+docker run -d \
+--name=Mipha \
+--restart=always \
+-p 10109:10109 \
+-p 10109:10109/udp \
+-e PASSWORD='passwd' \
+-e STATUS_ADDRESS=address \
+-e STATUS_USER=s03 \
+doss:0.1
 
 ### connection information
 port: 443
