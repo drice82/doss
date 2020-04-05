@@ -18,9 +18,8 @@ ENV PATH /usr/bin/v2ray:$PATH
 
 #copy app and config
 COPY /root/v2ray/config.json /etc/v2ray/config.json
-COPY /root/v2ray/config-ss.json /home/config.json
 COPY /root/v2muser /usr/bin/v2muser/
-COPY /root/caddy/Caddyfile /etc/caddy/Caddyfile
+# COPY /root/caddy/Caddyfile /etc/caddy/Caddyfile 改为自行配置
 COPY /root/serverstatus/client-linux.py /usr/bin/srvstatus/
 
 # 生成SSH keys,baseimage-docker不包含任何的key,所以需要你自己生成.你也可以注释掉这句命令,系统在启动过程中,会生成一个.
